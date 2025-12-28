@@ -5,12 +5,15 @@ on:
     branches:
       - main
 
+permissions:
+  contents: write   # 🔴 THIS FIXES EXIT CODE 128
+
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Setup Node.js
@@ -21,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: npm install
 
-      - name: Build project
+      - name: Build React app
         run: npm run build
 
       - name: Deploy to GitHub Pages
